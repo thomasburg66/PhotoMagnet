@@ -1,4 +1,4 @@
-int pin_out_camera=5;
+int pin_out_camera=5; // experimential!
 int pin_out_magnet=6;
 int pin_out_flash=7;
 
@@ -19,7 +19,7 @@ void setup()
 {  
   
   Serial.begin(38400); 
-  Serial.println("TBs Relais Test V1.01"); 
+  Serial.println("PhotoMagnet V1.01"); 
   Serial.println(); 
    
   pinMode(pin_out_magnet,OUTPUT);
@@ -94,9 +94,9 @@ void fireRelay(int pin, char *what, int duration) {
 }
   
 void readValues() {
+  readInt("camera_duration    ",camera_duration,&camera_duration);
   readInt("delay_before_magnet",delay_before_magnet,&delay_before_magnet);
   readInt("delay_after_magnet ",delay_after_magnet,&delay_after_magnet);
-  readInt("camera_duration    ",camera_duration,&camera_duration);
   readInt("flash_duration     ",flash_duration,&flash_duration);
   readInt("magnet_duration    ",magnet_duration,&magnet_duration);
 }
@@ -113,13 +113,15 @@ void loop()
   // wait for Start
   waitForEnter();
   
-  // fire camera
-  fireRelay(pin_out_camera,"camera",camera_duration);
+  // fire camera - not activated
+  // fireRelay(pin_out_camera,"camera",camera_duration);
+  
   // wait until magnet
   delayAfterFiring(camera_duration,delay_before_magnet);
   
   // fire magnet
   fireRelay(pin_out_magnet,"magnet",magnet_duration);
+  
   // wait until flash
   delayAfterFiring(magnet_duration,delay_after_magnet);
 
