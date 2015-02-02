@@ -1,13 +1,14 @@
-int pin_out_camera=5; // experimential!
+int pin_out_camera=5; // experimental, not active yet
 int pin_out_magnet=6;
 int pin_out_flash=7;
 
 int log_level=50;  // for future use, could make the program less chatty
 
+// default values
 int delay_before_magnet=1000,delay_after_magnet=0;
 int flash_duration=10;
 int magnet_duration=50;
-int camera_duration=50;
+int camera_duration=0;
 
 #define INLENGTH 20
 char inString[INLENGTH+1];
@@ -94,7 +95,7 @@ void fireRelay(int pin, char *what, int duration) {
 }
   
 void readValues() {
-  readInt("camera_duration    ",camera_duration,&camera_duration);
+//  readInt("camera_duration    ",camera_duration,&camera_duration);
   readInt("delay_before_magnet",delay_before_magnet,&delay_before_magnet);
   readInt("delay_after_magnet ",delay_after_magnet,&delay_after_magnet);
   readInt("flash_duration     ",flash_duration,&flash_duration);
